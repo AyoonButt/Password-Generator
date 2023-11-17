@@ -14,9 +14,9 @@ Tasks to be performed:
 
 Give the user choices (do this in the start and after the completion of each task and set up some sort of exit option )
 
-Choice 1 - Take a password as input, Compare to a perfect password or to a set of requiremnts , detail differences and suggetions, rate the strength out of 10 (a switch could be used here)  
+Choice 1 - Take a password as input, Compare to a perfect password or to a set of requirements , detail differences and suggestions, rate the strength out of 10 (a switch could be used here)  
 
-Choice 2 - Take requiremnts as input, set those requirements as your paramaters, generate a password with the required strength
+Choice 2 - Take requirements as input, set those requirements as your paramaters, generate a password with the required strength
 
 
 
