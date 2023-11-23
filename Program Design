@@ -3,8 +3,10 @@ Main:
    switch:
 
      case 1:
-          checkPasswordStrength()
-
+          case 1:
+             SimpleStrengthChecker.checkStrength
+          case 2
+              ComplexStrengthChecke.checkStrength
      case 2: 
           generatePassword()
 
@@ -33,5 +35,8 @@ Class generatePassword
       generate password code
 
      @ no passwords should be the same unless all possibilities have been exhausted
+
+Exit
+   exit program
 
       
