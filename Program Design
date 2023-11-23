@@ -1,0 +1,37 @@
+Main: 
+
+   switch:
+
+     case 1:
+          checkPasswordStrength()
+
+     case 2: 
+          generatePassword()
+
+     case 3: 
+          exit()
+
+
+Interface  checkPasswordStrength: 
+     checkStrength() 
+  
+
+SimpleStrengthChecker:
+      override checkStrength() 
+          return calculateStrength  
+
+       private calculateStrength()  @responsible for strength calculation which will be moved into the public method the objects will be able to access
+
+ComplexStrengthChecker:
+      override checkStrength() 
+          return calculateStrength
+
+       private calculateStrength()
+
+
+Class generatePassword
+      generate password code
+
+     @ no passwords should be the same unless all possibilities have been exhausted
+
+      
