@@ -10,9 +10,12 @@ public class Main
       System.out.println("2.Generate Password");
       System.out.println("3.Quit");
       int userinput = option.nextInt();
-      switch(userinput) 
-      {
-        case 1:
+      boolean loop = true;
+      while (loop)
+        {
+          switch(userinput) 
+          {
+            case 1:
             System.out.println("Which of the following Strngth Checkers would you like to use (1 or 2)?");
             System.out.println("1.Simple Strength Checker");
             System.out.println("2.Complex Strength Checker");
@@ -43,10 +46,12 @@ public class Main
             break;
         case 3:
             System.out.println("Exiting program...");
-            System.exit(0);
+            loop = false;
+            break;
         default:
             System.out.println("Invalid option, please type in 1, 2, or 3");
             break;
-      }
+          }
+        }
   }
 }
