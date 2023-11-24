@@ -1,0 +1,39 @@
+import java.util.Scanner;
+class CheckPassword
+{
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		
+		System.out.println("Enter Password:");
+		String input=scan.nextLine();
+		
+		int rating = calculateStrength(input);
+		
+		System.out.println("The password strength will be rated (1-10),your rating is : " +rating );
+		
+		
+	}
+	public static int calculateStrength(String input){
+	    
+	    int length = input.length();
+	    int strength = 1;
+	    strength +=Math.min(5, length/4);  
+	    
+	    if(input.matches(".*[a-z].*")){
+	        strength +=1;
+	    }
+	    if(input.matches(".*[A-Z].*")){
+	        strength +=2;
+	        
+	    }
+	    
+	    if(input.matches(".*\\d.*")){
+	        strength+=2;
+	    }
+	    if(input.matches(".*a-z1-10A-Z")){
+	        strength+=3;
+	    }
+	    
+	    return Math.min(10,strength);
+	}
+}
