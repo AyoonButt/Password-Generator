@@ -26,7 +26,7 @@ Individual Assigments:
 
 Ayoon: GeneratePassword
 
-Benny: SimpleStrengthChecker
+Benny: SimpleStrengthChecker and Debugging
 
 Ariston: ComplexStrengthChecker
 
