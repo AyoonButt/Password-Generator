@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComplexStrengthChecker {
+
+public class ComplexStrengthChecker implements PasswordStrengthEvaluator {
 
     // Method to calculate the strength of a password and provide feedback
-    public static String assessPassword(String password) {
+    @Override
+    public String assessPassword(String password) {
         List<String> feedback = new ArrayList<>();
         int strengthScore = 0;
 
@@ -20,7 +22,7 @@ public class ComplexStrengthChecker {
     }
 
     // Length check with feedback
-    private static int calculateLengthScore(String password, List<String> feedback) {
+    private int calculateLengthScore(String password, List<String> feedback) {
         int length = password.length();
         int score = Math.min(5, length / 4);
         if (length < 8) {
@@ -30,7 +32,7 @@ public class ComplexStrengthChecker {
     }
 
     // Character diversity check with feedback
-    private static int calculateCharacterDiversityScore(String password, List<String> feedback) {
+    private int calculateCharacterDiversityScore(String password, List<String> feedback) {
         int score = 0;
         if (!password.matches(".*[a-z].*")) {
             feedback.add("Add lowercase letters for more security.");
@@ -56,7 +58,7 @@ public class ComplexStrengthChecker {
     }
 
     // Pattern recognition with feedback
-    private static int calculatePatternRecognitionScore(String password, List<String> feedback) {
+    private int calculatePatternRecognitionScore(String password, List<String> feedback) {
         int penalty = 0;
         String[] commonPatterns = {"123", "abc", "password", "qwerty"};
         for (String pattern : commonPatterns) {
@@ -69,7 +71,7 @@ public class ComplexStrengthChecker {
     }
 
     // Entropy calculation with feedback
-    private static int calculateEntropyScore(String password, List<String> feedback) {
+    private int calculateEntropyScore(String password, List<String> feedback) {
         double entropy = 0.0;
         int[] charFrequencies = new int[256];
         for (char c : password.toCharArray()) {
@@ -89,9 +91,10 @@ public class ComplexStrengthChecker {
     }
 
     public static void main(String[] args) {
-        // Test the ComplexStrengthChecker with feedback
+        PasswordStrengthEvaluator evaluator = new ComplexStrengthChecker();
         String testPassword = "TestPassword123!";
-        String result = assessPassword(testPassword);
+        String result = evaluator.assessPassword(testPassword);
         System.out.println(result);
     }
 }
+
