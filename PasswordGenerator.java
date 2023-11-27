@@ -60,7 +60,7 @@ public class PasswordGenerator {
         }
     
         // If all possibilities are exhausted, you might want to handle this situation (e.g., throw an exception)
-        throw new RuntimeException("All possible passwords have been exhausted.");
+        throw new RuntimeException("All possible passwords have been exhausted. Please chose a different complexity or length");
     }
     
     
@@ -173,8 +173,8 @@ public class PasswordGenerator {
         PasswordGenerator passwordGenerator = new PasswordGenerator();
 
         // Set length and complexity outside the class
-        passwordGenerator.setLength(5);
-        passwordGenerator.setComplexity(4);
+        passwordGenerator.setLength(1);
+        passwordGenerator.setComplexity(1);
 
         // Generate and print the password
         String generatedPassword = passwordGenerator.generatePassword();
