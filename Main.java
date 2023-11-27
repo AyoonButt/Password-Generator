@@ -1,5 +1,8 @@
 import java.util.Scanner;
-
+javac -d . ComplexStrengthChecker.java
+javac -d . StrengthChecker.java
+javac -d . PasswordGenerator.java
+  
 public class Main implements checkPasswordStrength
 {
   public static void main(String[] args) 
