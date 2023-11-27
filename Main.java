@@ -1,8 +1,5 @@
 import java.util.Scanner;
 
-
-
-
 public class Main implements checkPasswordStrength
 {
   public static void main(String[] args) 
