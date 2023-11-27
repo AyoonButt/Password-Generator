@@ -19,12 +19,19 @@ public class PasswordGenerator {
 
     private Set<String> usedPasswords;
 
-    public PasswordGenerator(int length, int complexity) {
-        this.length = length;
-        this.complexity = complexity;
+    public PasswordGenerator() {
         this.usedPasswords = new HashSet<>();
         loadUsedPasswords();
     }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void setComplexity(int complexity) {
+        this.complexity = complexity;
+    }
+    
     public String generatePassword() {
         // Load used passwords from persistent storage
         loadUsedPasswords();
@@ -56,8 +63,6 @@ public class PasswordGenerator {
         throw new RuntimeException("All possible passwords have been exhausted.");
     }
     
-    
-
     
     
 
@@ -163,18 +168,19 @@ public class PasswordGenerator {
     }
 
   
-
-
     public static void main(String[] args) {
-        
-        PasswordGenerator passwordGenerator = new PasswordGenerator(5, 4);
-        String generatedPassword = passwordGenerator.generatePassword();
-    
-        // Print the generated password
-        System.out.println("Generated Password: " + generatedPassword);
-      
+        // Create an instance of PasswordGenerator
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
 
+        // Set length and complexity outside the class
+        passwordGenerator.setLength(5);
+        passwordGenerator.setComplexity(4);
+
+        // Generate and print the password
+        String generatedPassword = passwordGenerator.generatePassword();
+        System.out.println("Generated Password: " + generatedPassword);
     }
+
 }
 
 
