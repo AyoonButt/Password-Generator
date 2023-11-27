@@ -1,19 +1,10 @@
 import java.util.Scanner;
-class CheckPassword
-{
-	public static void main(String[] args) {
-		Scanner scan=new Scanner(System.in);
-		
-		System.out.println("Enter Password:");
-		String input=scan.nextLine();
-		
-		int rating = calculateStrength(input);
-		
-		System.out.println("The password strength will be rated (1-10),your rating is : " +rating );
-		
-		
-	}
-	public static int calculateStrength(String input){
+class CheckPassword extends checkPasswordStrength {
+        @Override
+        public checkStrength(){
+              return caluclateStrenght(input)
+	
+	private int calculateStrength(String input){
 	    
 	    int length = input.length();
 	    int strength = 1;
