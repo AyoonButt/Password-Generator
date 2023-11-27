@@ -1,5 +1,11 @@
 import java.util.Scanner;
-public class Main
+
+public interface  checkPasswordStrength
+  {
+    public int checkStrength();
+  }
+
+public class Main implements checkPasswordStrength
 {
   public static void main(String[] args) 
   {
@@ -42,7 +48,8 @@ public class Main
             }
         break;
         case 2:
-            generatePassword();
+            PasswordGenerator passwordgenerate = new PasswordGenerator(12,7);
+            String generatedpassword = passwordgenerate.generatePassword();
             break;
         case 3:
             System.out.println("Exiting program...");

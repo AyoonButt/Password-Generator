@@ -24,10 +24,10 @@ Choice 3 - Exit
 
 Individual Assigments:
 
-Ayoon: generatePassword
+Ayoon: GeneratePassword
 
-Ariston: SimpleStrengthChecker
+Benny: SimpleStrengthChecker and Debugging
 
-Benny: ComplexStrengthChecker
+Ariston: ComplexStrengthChecker
 
-Vince: Main and Exit implementation
+Vince: Main Exit and Interface
