@@ -1,11 +1,29 @@
 import java.util.Scanner;
 
-public interface  checkPasswordStrength
+public interface checkPasswordStrength
   {
-    public int checkStrength();
+    public void checkStrength();
   }
 
-public class Main 
+public class SimpleStrengthChecker
+  {
+    @Override
+    public void checkStrength() 
+    {
+      return calculateStrength();
+    }
+  }
+
+public class ComplexStrengthChecker
+  {
+    @Override
+    public void checkStrength() 
+    {
+      return calculateStrength();
+    }
+  }
+
+public class Main implements checkPasswordStrength
 {
   public static void main(String[] args) 
   {
