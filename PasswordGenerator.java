@@ -25,44 +25,60 @@ public class PasswordGenerator {
         this.usedPasswords = new HashSet<>();
         loadUsedPasswords();
     }
-
-  public String generatePassword() {
-    // Calculate the maximum number of possible passwords with the given length and complexity
-    long maxPossiblePasswords = calculateMaxPossiblePasswords(length, complexity);
-
-    // Keep generating passwords until a unique one is found or all possibilities are exhausted
-    for (long attempt = 1; attempt <= maxPossiblePasswords; attempt++) {
-        String newPassword = generateRandomPassword(length, complexity);
-
-        // Check if the hashed password is not in the set of used passwords
-        if (!usedPasswords.contains(hashPassword(newPassword))) {
-            saveUsedPassword(newPassword);
-            return newPassword;
+    public String generatePassword() {
+        // Load used passwords from persistent storage
+        loadUsedPasswords();
+    
+        // Calculate the maximum number of possible passwords with the given length and complexity
+        long maxPossiblePasswords = calculateMaxPossiblePasswords(length, complexity);
+    
+        // Keep generating passwords until a unique one is found or all possibilities are exhausted
+        Set<String> attemptedPasswords = new HashSet<>();
+        for (long attempt = 1; attempt <= maxPossiblePasswords; attempt++) {
+            try {
+                String newPassword = generateRandomPassword(length, complexity);
+    
+                // Check if the hashed password is not in the set of used passwords
+                if (!usedPasswords.contains(hashPassword(newPassword))) {
+                    saveUsedPassword(newPassword);
+                    return newPassword;
+                } else {
+                    // Track attempted passwords for clearing in case of exhaustion
+                    attemptedPasswords.add(newPassword);
+                }
+            } catch (Exception e) {
+                // Clear only the attempted passwords with the same length and complexity
+                usedPasswords.removeAll(attemptedPasswords);
+            }
         }
+    
+        // If all possibilities are exhausted, you might want to handle this situation (e.g., throw an exception)
+        throw new RuntimeException("All possible passwords have been exhausted.");
     }
+    
+    
 
-    // If all possibilities are exhausted, you might want to handle this situation (e.g., throw an exception)
-    throw new RuntimeException("All possible passwords have been exhausted.");
-}
+    
+    
 
-private long calculateMaxPossiblePasswords(int length, int complexity) {
-    long totalPossiblePasswords = 1;
-    String allCharacterTypes = LOWERCASE_CHARS + UPPERCASE_CHARS + DIGITS + SPECIAL_CHARS;
+    private long calculateMaxPossiblePasswords(int length, int complexity) {
+        long totalPossiblePasswords = 1;
+        String allCharacterTypes = LOWERCASE_CHARS + UPPERCASE_CHARS + DIGITS + SPECIAL_CHARS;
 
-    for (int i = 0; i < length; i++) {
-        if (complexity <= 2) {
-            totalPossiblePasswords *= LOWERCASE_CHARS.length();
-        } else if (complexity <= 5) {
-            totalPossiblePasswords *= allCharacterTypes.length();
-        } else if (complexity <= 8) {
-            totalPossiblePasswords *= (allCharacterTypes + DIGITS).length();
-        } else {
-            totalPossiblePasswords *= (allCharacterTypes + DIGITS + SPECIAL_CHARS).length();
+        for (int i = 0; i < length; i++) {
+            if (complexity <= 2) {
+                totalPossiblePasswords *= LOWERCASE_CHARS.length();
+            } else if (complexity <= 5) {
+                totalPossiblePasswords *= allCharacterTypes.length();
+            } else if (complexity <= 8) {
+                totalPossiblePasswords *= (allCharacterTypes + DIGITS).length();
+            } else {
+                totalPossiblePasswords *= (allCharacterTypes + DIGITS + SPECIAL_CHARS).length();
+            }
         }
-    }
 
-    return totalPossiblePasswords;
-}
+        return totalPossiblePasswords;
+    }
 
     private static String generateRandomPassword(int length, int complexity) {
         SecureRandom random = new SecureRandom();
@@ -96,12 +112,14 @@ private long calculateMaxPossiblePasswords(int length, int complexity) {
         // Save the password to a persistent storage (e.g., a file or a database)
         // You can use hashing to store passwords securely
         try (PrintWriter writer = new PrintWriter(new FileWriter("used_passwords.txt", true))) {
-            writer.println(hashPassword(password));
-            usedPasswords.add(hashPassword(password));
+            String hashedPassword = hashPassword(password);
+            writer.println(hashedPassword);
+            usedPasswords.add(hashedPassword);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
 
     private void loadUsedPasswords() {
         // Load used passwords from persistent storage
@@ -149,7 +167,7 @@ private long calculateMaxPossiblePasswords(int length, int complexity) {
 
     public static void main(String[] args) {
         
-        PasswordGenerator passwordGenerator = new PasswordGenerator(12, 7);
+        PasswordGenerator passwordGenerator = new PasswordGenerator(5, 4);
         String generatedPassword = passwordGenerator.generatePassword();
     
         // Print the generated password
