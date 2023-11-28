@@ -3,10 +3,14 @@ import java.util.List;
 
 
 public class ComplexStrengthChecker implements PasswordStrengthEvaluator {
-
-    // Method to calculate the strength of a password and provide feedback
+   
     @Override
-    public String assessPassword(String password) {
+    public String checkStrength(String password) {
+        return assessPassword(password);
+    }
+    // Method to calculate the strength of a password and provide feedback
+    
+    private String assessPassword(String password) {
         List<String> feedback = new ArrayList<>();
         int strengthScore = 0;
 
@@ -90,11 +94,6 @@ public class ComplexStrengthChecker implements PasswordStrengthEvaluator {
         return entropyScore;
     }
 
-    public static void main(String[] args) {
-        PasswordStrengthEvaluator evaluator = new ComplexStrengthChecker();
-        String testPassword = "TestPassword123!";
-        String result = evaluator.assessPassword(testPassword);
-        System.out.println(result);
-    }
+ 
 }
 

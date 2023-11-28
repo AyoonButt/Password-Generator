@@ -1,3 +1,4 @@
-public interface PasswordStrengthEvaluator {
-    String assessPassword(String password);
-}
+public interface PasswordStrengthEvaluator
+  {
+    String checkStrength(String password);
+  }
