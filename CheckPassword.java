@@ -5,7 +5,7 @@
     @Override
     public String checkStrength(String input) {
         int rating = calculateStrength(input);
-        return "The password strength will be rated (1-10), your rating is: " + rating;
+        return "The password strength will be rated (1-10), your rating is: " +rating;
     }
 
     private int calculateStrength(String input) {

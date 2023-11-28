@@ -25,7 +25,8 @@ public class RunProject {
                             System.out.println("Enter your password");
                             String passwordSimple = option.next();
                             CheckPassword passwordChecker = new CheckPassword();
-                            passwordChecker.checkStrength(passwordSimple);
+                            String ratingMessage = passwordChecker.checkStrength(passwordSimple);
+                            System.out.println(ratingMessage);
                             System.out.println("Would you like to rerun the program? (y/n)");
                             String responsesimple = option.next();
                             if (responsesimple.equals("y")) {
