@@ -34,16 +34,16 @@ public class PasswordGenerator {
     public String generatePassword() {
         // Load used passwords from persistent storage
         loadUsedPasswords();
-
+    
         // Calculate the maximum number of possible passwords with the given length and complexity
         long maxPossiblePasswords = calculateMaxPossiblePasswords(length, complexity);
-
+    
         // Keep generating passwords until a unique one is found or all possibilities are exhausted
         Set<String> attemptedPasswords = new HashSet<>();
         for (long attempt = 1; attempt <= maxPossiblePasswords; attempt++) {
             try {
                 String newPassword = generateRandomPassword(length, complexity);
-
+    
                 // Check if the hashed password is not in the set of used passwords
                 if (!usedPasswords.contains(hashPassword(newPassword))) {
                     saveUsedPassword(newPassword);
@@ -53,14 +53,20 @@ public class PasswordGenerator {
                     attemptedPasswords.add(newPassword);
                 }
             } catch (Exception e) {
+                // Handle the exception by printing a statement (without terminating the run)
+                System.out.println("An exception occurred while generating a password: " + e.getMessage());
+    
                 // Clear only the attempted passwords with the same length and complexity
                 usedPasswords.removeAll(attemptedPasswords);
             }
         }
-
-        // If all possibilities are exhausted, you might want to handle this situation (e.g., throw an exception)
-        throw new RuntimeException("All possible passwords have been exhausted. Please choose a different complexity or length");
+    
+        // Handle the situation where all possibilities are exhausted
+        System.out.println("All possible passwords have been exhausted. Please choose a different complexity or length");
+        return null; // You might want to return a default value or handle this case accordingly
     }
+    
+    
 
     // find the number of possible outcomes so that you can find out when all possibilities are exhausted
     private long calculateMaxPossiblePasswords(int length, int complexity) {
