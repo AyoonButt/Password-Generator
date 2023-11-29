@@ -89,7 +89,7 @@ public class RunProject {
         PasswordGenerator passwordGenerator = new PasswordGenerator();
 
         // Ask the user for password length
-        System.out.println("How long would you like the password(s) to be? (Enter integer value between 1 and 102)");
+        System.out.println("How long would you like the password(s) to be? (Enter integer value between 1 and 10)");
         int length = option.nextInt();
         passwordGenerator.setLength(length);
 
